@@ -1,0 +1,5 @@
+{
+  "coz": "https://github.com/coz-repo/coz",
+  "nodeunit": "https://github.com/caolan/nodeunit",
+  "mocha": "https://github.com/mochajs/mocha"
+}

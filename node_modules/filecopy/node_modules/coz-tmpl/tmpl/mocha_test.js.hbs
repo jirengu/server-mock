@@ -1,0 +1,25 @@
+{{!
+    Template for mocha testcase
+}}/**
+ * Test case for {{camelcase name}}.
+ * Runs with mocha.
+ */
+
+var {{camelcase name}} = require('{{relative}}');
+
+describe('{{spinalcase name}}', function suite() {
+
+    before(function setup(done) {
+        done();
+    });
+
+    after(function teardown(done) {
+        done();
+    });
+
+
+    it('{{sentencecase name}}', function (done) {
+        done();
+    });
+});
+

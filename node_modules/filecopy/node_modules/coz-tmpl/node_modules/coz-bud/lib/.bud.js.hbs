@@ -1,0 +1,53 @@
+/**
+ * Bud constructor.
+ * {{about}}
+ * @memberof module:coz-bud/lib
+ * @inner
+ * @constructor Bud
+ * @param {object} config - Bud configuration.{{#each properties}}{{#if configurable}}
+ * @param {{braces type}} {{#if optional}}[{{/if}}config.{{name}}{{#if default}}={{{default}}}{{/if}}{{#if optional}}]{{/if}} - {{description}}.{{/if}}{{/each}}
+ */
+
+"use strict";
+
+var copying = require('./copying'),
+    assert = require('assert');
+
+/** @lends Bud */
+function Bud(config) {
+    var s = this;
+    copying.copy(config, s);
+    copying.fallbackCopy(Bud.defaults, s);
+    s.validate();
+}
+
+Bud.prototype = {
+{{#each properties}}
+    /**
+     * {{description}}
+     * @type {{braces type}}
+     */
+    {{name}}: {{#if default}}{{{default}}}{{else}}undefined{{/if}},
+{{/each}}
+    /**
+     * Validate this configuration.
+     * @throws Will throw an error if configuration invalid.
+     */
+    validate: function () {
+        var s = this;
+
+        function _assertType(value, type, msg) {
+            if (typeof(value) === 'undefined') {
+                return;
+            }
+            var valid = !!~type.split(/\|/g).indexOf(typeof(value));
+            assert(valid, msg);
+        }
+
+{{#each properties}}        _assertType(s.{{name}}, '{{{type}}}', 'bud.{{name}} should be {{type}}.');
+{{/each}}
+    }
+};
+
+
+module.exports = Bud;

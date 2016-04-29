@@ -1,0 +1,16 @@
+/**
+ * Bud file for bower.json
+ */
+
+"use strict";
+
+var apeTmpl = require('ape-tmpl'),
+    pkg = require('./package.json');
+
+module.exports = apeTmpl.bowerJsonBud({
+    pkg: pkg
+});
+
+if (!module.parent) {
+    require('coz').render(__filename);
+}

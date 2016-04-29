@@ -1,0 +1,6 @@
+languages:
+  JavaScript: true
+exclude_paths:
+  - "browser/*.js"
+  - "ci/*.js"
+  - "docs/*.js"

@@ -1,0 +1,22 @@
+{{!
+    Template for index.js
+}}/**
+ * {{desc}}{{#if module}}
+ * @module {{module}}{{/if}}{{#each parentmodule}}
+ * @see module:{{this}}{{/each}}
+ */
+
+"use strict";
+
+module.exports = {
+{{#each modules}}{{#if isSubmodules}}    /**
+     * @memberof module:{{../../module}}
+     * @name {@link module:{{../../module}}/{{camelcase name}}|{{camelcase name}}{{{../../END_BRACE}}}
+     */
+{{/if}}    {{#if isSubclass}}/**
+     * @memberof module:{{../../module}}
+     * @name {@link module:{{../../module}}~{{pascalcase name}}|{{pascalcase name}}{{{../../END_BRACE}}}
+     */
+    get {{pascalcase name}}{{else}}get {{camelcase name}}{{/if}}() { return require('./{{requireName}}'); }{{#if @last}}{{else}},
+{{/if}}{{/each}}
+};

@@ -1,0 +1,48 @@
+{
+  "name": "server-mock",
+  "version": "1.0.4",
+  "description": "迷你的 webserver，可 mock 数据",
+  "main": "index.js",
+  "bin": {
+    "mock": "./bin/server",
+    "server-mock": "./bin/server",
+    "server": "./bin/server"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jirengu/server-mock.git"
+  },
+  "keywords": [
+    "webserver",
+    "mock",
+    "node",
+    "ruoyu",
+    "jirengu"
+  ],
+  "author": {
+    "name": "ruoyu"
+  },
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jirengu/server-mock/issues"
+  },
+  "homepage": "https://github.com/jirengu/server-mock#readme",
+  "dependencies": {
+    "body-parser": "^1.15.0",
+    "concat-files": "^0.1.0",
+    "ejs": "^2.4.1",
+    "express": "^4.13.4",
+    "filecopy": "^1.0.8",
+    "handlebars": "^4.0.5",
+    "jade": "^1.11.0",
+    "yargs": "^4.6.0"
+  },
+  "readme": "ERROR: No README data found!",
+  "readmeFilename": "README.md",
+  "_id": "server-mock@1.0.1",
+  "_shasum": "5908fccb5acdae29d2fc6a21f83a836a573423fd",
+  "_from": "server-mock@*"
+}
