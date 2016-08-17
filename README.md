@@ -1,7 +1,5 @@
 server-mock 是一个简单好用的 webserver， 基于 express 开发，可方便的 mock 数据。
-'hello'
 
-"hello"
 
 ## 安装
 ```
