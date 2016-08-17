@@ -26,4 +26,7 @@ start --tpl ejs        //设置模板，支持 ejs, jade
 start --tpl ejs --port 3000"  //设置模板为ejs,端口为3000。 默认端口是8080
 
 ```
+## 作者
+饥人谷-若愚
+
 欢迎大家 pull request，共同完善最简单无脑的 mock 工具
