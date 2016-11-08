@@ -67,7 +67,7 @@ mock start
 mock start --port 3000         // 设置服务器启动端口为3000
 mock start --public public    //设置静态文件路径为当前文件 public 目录。默认是当前文件夹
 mock start --views views     //设置模板路径为当前文件 views 目录。默认是当前文件夹
-mock start --tpl ejs        //设置模板，支持 ejs, jade
+mock start --tpl ejs        //设置模板，支持 ejs, jade, velocity
 mock start --tpl ejs --port 3000"  //设置模板为ejs,端口为3000。 默认端口是8080
 
 ```
