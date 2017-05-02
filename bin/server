@@ -2,20 +2,21 @@
 
 
 
-
 /**
  * Handle cli input
  */
 if (!module.parent) {
+    var chalk  = require("chalk")
     var yargs = require("yargs")
-        .command("start", "启动 webserver")
-        .command("init", "创建使用范例")
+    var argv    = yargs.argv
+    var name = argv['$0']
+    var command = argv._[0]
+    var valid   = ["start", "init", "open"]
 
-        .epilogue("查看命令的详细使用, 输入 <command> --help\n如: $0 start --help");
-
-    var argv    = yargs.argv;
-    var command = argv._[0];
-    var valid   = ["start", "init"];
+    yargs.command(chalk.green(name + " open"), "Start a web server and open html file in your browser, if any")
+        .command(chalk.green(name + " start"), "Start a web server")
+        .command(chalk.green(name + " init"), "Create the sample file router.js")
+        .epilogue("For more use, enter " + chalk.green(name + " <command> --help") + "\nFor example: " + chalk.green(name + " start --help"));
 
     if (valid.indexOf(command) > -1) {
         handleIncoming(command, yargs.reset());
@@ -40,26 +41,35 @@ module.exports = handleCli;
  */
 function handleIncoming(command, yargs) {
     var out;
+    if (command === "open") {
+        out = yargs
+            .usage("Usage: " + chalk.green("mock open [options]"))
+            .example(chalk.green("mock open --port=3000"), "set server port, default 8080")
+            .example(chalk.green("mock open --public=public"), "set the static file path, the default is the current folder")
+            .example(chalk.green("mock open --views=views"), "set the template path, the default is the current folder")
+            .example(chalk.green("mock open --tpl=ejs"), "set the template type, support ejs, pug")
+            // .help()
+            .argv;
+    }
     if (command === "start") {
         out = yargs
-            .usage("使用方法: $0 start [options]")
-            .example("$0 start --port 3000", "- 设置端口")
-            .example("$0 start --public public", "- 设置静态文件路径为当前文件 public 目录。默认是当前文件夹")
-            .example("$0 start --views views", "- 设置模板路径为当前文件 views 目录。默认是当前文件夹")
-            .example("$0 start --tpl ejs", "- 设置模板，支持 ejs, jade")
-            .example("$0 start --tpl ejs --port 8080", "- 设置模板为ejs,端口为8080")
-            .help()
+            .usage("Usage: " + chalk.green("mock start [options]"))
+            .example(chalk.green("mock start --port=3000"), "set server port, default 8080")
+            .example(chalk.green("mock start --public=public"), "set the static file path, the default is the current folder")
+            .example(chalk.green("mock start --views=views"), "set the template path, the default is the current folder")
+            .example(chalk.green("mock start --tpl=ejs"), "set the template type, support ejs, pug, default ejs")
+            // .help()
             .argv;
     }
     if (command === "init") {
         out = yargs
-            .usage("使用方法: $0 init")
-            .example("$0 init", "- 创建使用范例")
-            .help()
+            .usage("Usage: " + chalk.green("mock init"))
+            .example(chalk.green("mock init"), "create usage examples, include index.html and router.js")
             .argv;
     }
 
-    if (out.help) {
+
+    if (out&&out.help) {
         return yargs.showHelp();
     }
 

@@ -1,3 +1,6 @@
+function setRouter(app){ 
+ var router = app; 
+
 //假设域名是localhost, 端口是8080
 
 //更多详细使用方法参考 http://www.expressjs.com.cn/guide/routing.html
@@ -66,3 +69,5 @@ router.use('/hi', (req, res)=>{
   res.send('world')
 })
 
+}
+ module.exports.setRouter = setRouter

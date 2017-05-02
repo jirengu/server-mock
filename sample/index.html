@@ -1,46 +1,51 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
 <head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-<title>server-mock使用说明</title>
-<style>
-  .container{
-    width: 900px;
-    margin: 0 auto;
-  }
-</style>
 </head>
 <body>
-  <div class="container">
-    <h1>server-mock使用说明</h1>
-    <pre>
-1. 执行 mock init, 生成使用范例
-2. 修改 router.js, 设置数据接口响应格式
-3. 写模板或者 html 文件，包含 ajax 接口
-4. mock start 启动服务器，在浏览器输入 http://localhost:8080/页面或者路由地址
-5. 审查元素查看请求
-    </pre>   
+  <div class="query-area">
+    <input type="text" name="username" value="hunger" placeholder="hunger, ruoyu, anyone">
+    <button>查询朋友</button>   
+  </div>
+  <div class="detail-area">
+    <ul>     
+    </ul>
+
   </div>
 
+  <script>
+    var btn = document.querySelector('.query-area button')
+    var input = document.querySelector('.query-area input')
+    
 
-  	<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
-    <script>
-  	$.get('/hello').done(function(ret){
-  		console.log(ret);
-  	});
+    btn.addEventListener('click', function(){
+       var xhr = new XMLHttpRequest()
+       xhr.onreadystatechange = function(){
+         if(xhr.readyState === 4 && (xhr.status === 200 || xhr.status === 304)){
+          var friends = JSON.parse(xhr.responseText)
+          render(friends)
+         }
+       }
 
-  	$.get('/user/100', {name:"ruoyu", age: 28})
-  	  .done(function(ret){
-  	  	console.log(ret);
-  	  }).fail(function(){
-  	  	console.log('error');
-  	  })
+      xhr.open('get', '/getFriends?username=' + input.value, true)
+      xhr.send()
+    })
 
-  	$.post('/comment',{comment: "这里是饥人谷"})
-  		.done(function(ret){
-  			console.log(ret);
-  		});
-  	</script>
+
+
+
+    function render(friends){
+      var detailCt = document.querySelector('.detail-area ul')
+      detailCt.innerHTML = '';
+      var ct = document.createDocumentFragment()
+      for(var i = 0; i < friends.length; i++){
+        var node = document.createElement('li')
+        node.innerText = friends[i]
+        ct.appendChild(node)
+      }
+      detailCt.appendChild(ct)
+    }
+  </script>
+  
 </body>
 </html>
